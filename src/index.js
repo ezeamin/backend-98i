@@ -2,7 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-// TODO: Importar base de datos
+import './database/database.js';
+
+import { mainRouter } from './routes/mainRouter.js';
 
 console.clear();
 console.log('⌛ Inicializando servidor...');
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use(cors());
 
 // 4. Rutas (o endpoints)
-// TODO: Importar rutas
+app.use('/api/v1', mainRouter);
 
 // 5. Loop del servidor
 app.listen(PORT, () => {
