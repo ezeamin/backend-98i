@@ -13,6 +13,10 @@ const Blog = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 export default mongoose.model('Blogs', Blog);

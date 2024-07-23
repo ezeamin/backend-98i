@@ -3,22 +3,23 @@ import HttpCodes from 'http-status-codes';
 import BlogModel from '../../../models/blogSchema.js';
 import { internalError } from '../../../helpers/helpers.js';
 
-export class PutController {
-  static async putBlog(req, res) {
+export class DeleteController {
+  static async deleteBlog(req, res) {
     const {
-      body,
       params: { id },
     } = req;
 
-    // Si llegamos al controlador, body está validado
-    // y tiene los campos correspondientes
-
     try {
       const action = await BlogModel.updateOne(
+        // Criterio de búsqueda
         {
           _id: id,
+          isActive: true,
         },
-        body,
+        // Lo que actualizamos
+        {
+          isActive: false,
+        },
       );
 
       if (action.matchedCount === 0) {
@@ -31,14 +32,10 @@ export class PutController {
 
       res.json({
         data: null,
-        message: 'Blog actualizado correctamente',
+        message: 'Blog eliminado correctamente',
       });
     } catch (e) {
-      internalError(
-        res,
-        e,
-        'Ocurrió un error actualizando el recurso indicado',
-      );
+      internalError(res, e, 'Ocurrió un error eliminando el recurso indicado');
     }
   }
 }
