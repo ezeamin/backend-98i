@@ -1,6 +1,5 @@
-import HttpCodes from 'http-status-codes';
-
 import BlogsModel from '../../../models/blogSchema.js';
+import { internalError } from '../../../helpers/helpers.js';
 
 export class GetController {
   static async getBlogs(_, res) {
@@ -21,12 +20,7 @@ export class GetController {
         message: 'Blogs encontrados correctamente',
       });
     } catch (e) {
-      console.error(e);
-
-      res.status(HttpCodes.INTERNAL_SERVER_ERROR).json({
-        data: null,
-        message: 'Ocurrió un error al leer la lista de blogs',
-      });
+      internalError(res, e, 'Ocurrió un error al leer la lista de blogs');
     }
   }
 }
