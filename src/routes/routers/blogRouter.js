@@ -14,3 +14,4 @@ blogRouter.post('/', Blogs.PostController.postBlog);
 blogRouter.put('/:id', Blogs.PutController.putBlog);
 
 // DELETE -------------------------
+blogRouter.delete('/:id', Blogs.DeleteController.deleteBlog);
