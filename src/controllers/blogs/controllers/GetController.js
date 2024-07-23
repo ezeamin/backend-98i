@@ -1,3 +1,5 @@
+import HttpCodes from 'http-status-codes';
+
 import BlogsModel from '../../../models/blogSchema.js';
 
 export class GetController {
@@ -21,7 +23,7 @@ export class GetController {
     } catch (e) {
       console.error(e);
 
-      res.status(500).json({
+      res.status(HttpCodes.INTERNAL_SERVER_ERROR).json({
         data: null,
         message: 'Ocurrió un error al leer la lista de blogs',
       });

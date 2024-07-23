@@ -1,3 +1,5 @@
+import HttpCodes from 'http-status-codes';
+
 import BlogModel from '../../../models/blogSchema.js';
 
 export class PostController {
@@ -15,14 +17,14 @@ export class PostController {
     try {
       await newBlog.save();
 
-      res.status(201).json({
+      res.status(HttpCodes.CREATED).json({
         data: null,
         message: 'Blog guardado correctamente',
       });
     } catch (e) {
       console.error(e);
 
-      res.status(500).json({
+      res.status(HttpCodes.INTERNAL_SERVER_ERROR).json({
         data: null,
         message: 'Ocurrió un error al guardar el blog',
       });
