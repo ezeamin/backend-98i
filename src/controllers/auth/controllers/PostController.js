@@ -28,10 +28,11 @@ export class PostController {
 
       const userInfo = {
         user: {
-          firstname: user.firstname,
-          lastname: user.lastname,
-          username: user.username,
-          isAdmin: user.isAdmin,
+          id: user._doc._id,
+          firstname: user._doc.firstname,
+          lastname: user._doc.lastname,
+          username: user._doc.username,
+          isAdmin: user._doc.isAdmin,
         },
       };
 
