@@ -2,13 +2,15 @@ import express from 'express';
 
 import { Users } from '../../controllers/users/index.js';
 import { validateBody } from '../../middlewares/validateBody.js';
-import { post_userValidationSchema } from '../../helpers/validationSchemas/usersValidationSchemas.js';
 import { isAuthenticated } from '../../middlewares/isAuthenticated.js';
+import { isAdmin } from '../../middlewares/isAdmin.js';
+
+import { post_userValidationSchema } from '../../helpers/validationSchemas/usersValidationSchemas.js';
 
 export const userRouter = express.Router();
 
 // GET ----------------------------
-userRouter.get('/', isAuthenticated, Users.GetController.getUsers);
+userRouter.get('/', isAuthenticated, isAdmin, Users.GetController.getUsers);
 
 // POST ----------------------------
 // /api/v1/users/

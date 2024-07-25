@@ -3,6 +3,7 @@ import express from 'express';
 import { Blogs } from '../../controllers/blogs/index.js';
 import { validateBody } from '../../middlewares/validateBody.js';
 import { isAuthenticated } from '../../middlewares/isAuthenticated.js';
+import { isAdmin } from '../../middlewares/isAdmin.js';
 
 import { post_put_blogValidationSchema } from '../../helpers/validationSchemas/blogsValidationSchemas.js';
 
@@ -16,6 +17,7 @@ blogRouter.get('/', Blogs.GetController.getBlogs);
 blogRouter.post(
   '/',
   isAuthenticated,
+  isAdmin,
   (req, res, next) =>
     validateBody(req, res, next, post_put_blogValidationSchema),
   Blogs.PostController.postBlog,
@@ -24,10 +26,17 @@ blogRouter.post(
 // PUT ----------------------------
 blogRouter.put(
   '/:id',
+  isAuthenticated,
+  isAdmin,
   (req, res, next) =>
     validateBody(req, res, next, post_put_blogValidationSchema),
   Blogs.PutController.putBlog,
 );
 
 // DELETE -------------------------
-blogRouter.delete('/:id', Blogs.DeleteController.deleteBlog);
+blogRouter.delete(
+  '/:id',
+  isAuthenticated,
+  isAdmin,
+  Blogs.DeleteController.deleteBlog,
+);
