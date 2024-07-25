@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const isAuthenticated = (req, res, next) => {
   const { headers } = req;
 
-  const authorizationHeader = headers.Authorization;
+  const authorizationHeader = headers.authorization;
 
   if (!authorizationHeader) {
     res.status(401).json({
