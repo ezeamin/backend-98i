@@ -11,6 +11,7 @@ export const blogRouter = express.Router();
 
 // GET ----------------------------
 blogRouter.get('/', Blogs.GetController.getBlogs);
+blogRouter.get('/:id', Blogs.GetController.getBlog);
 
 // POST ----------------------------
 // /api/v1/blogs/
